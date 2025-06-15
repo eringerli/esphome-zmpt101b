@@ -13,10 +13,11 @@ CONFIG_SCHEMA = sensor.SENSOR_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(Zmpt101bSensor),
     cv.Required("adc_pin"): cv.int_range(min=0, max=99),
     cv.Optional("sensitivity", default=500): cv.float_range(min=0, max=1000),
-    cv.Optional("frequency", default=50): cv.float_range(min=50, max=60)
+    cv.Optional("frequency", default=50): cv.float_range(min=50, max=60),
+    cv.Optional("update_interval", default="15s"): cv.update_interval
 })
 
 def to_code(config):
-    var = cg.new_Pvariable(config[CONF_ID], config["adc_pin"], config["sensitivity"], config["frequency"])
+    var = cg.new_Pvariable(config[CONF_ID], config["adc_pin"], config["sensitivity"], config["frequency"], config["update_interval"])
     yield cg.register_component(var, config)
     yield sensor.register_sensor(var, config)

@@ -14,7 +14,7 @@ namespace esphome {
       uint8_t                         adcPin;
       esphome::zmpt101b_ns::ZMPT101B* zmpt101b;
       // constructor
-      ZMPT101BSensor( uint8_t adcPin, float sensitivity, float frequency ) : PollingComponent( 1000 ) {
+      ZMPT101BSensor( uint8_t adcPin, float sensitivity, float frequency, uint32_t update_interval ) : PollingComponent( update_interval ) {
         this->adcPin   = adcPin;
         this->zmpt101b = new esphome::zmpt101b_ns::ZMPT101B( adcPin, frequency );
         this->zmpt101b->setSensitivity( sensitivity );
